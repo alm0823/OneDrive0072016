@@ -1,0 +1,93 @@
+\documentclass[11pt]{cscrs_notes} % Set up
+
+\usepackage{lipsum}
+\usepackage{parskip} % Adds spacing between paragraphs
+\setlength{\parindent}{15pt} % Indent paragraphs
+
+
+%----------------------------------------------------------------------------------------
+%	MEETING INFORMATION
+%----------------------------------------------------------------------------------------
+\studytitle{Name of the Study Notes}
+\clientname{First Last}
+\leadconsultant{First Last, Degree}
+\secdconsultant{First Last, Degree}
+\clientloc{City, State}
+\mtgdate{MM/DD/YYYY}
+\director{Lillian Lin, Ph.D.}
+
+\setlength{\parindent}{0pt}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\makenotestitle % Print the meeting information
+
+%----------------------------------------------------------------------------------------
+%	NOTES
+%----------------------------------------------------------------------------------------
+\section{Background}
+Katie Renwick is a postdoc student at the Ecosystem Dynamics Lab at MSU. Katie is collaborating with several other researchers to submit this research for publication. Katie has a strong Bayesian statistical background.
+Her work is focused in predicting sage brush cover in the presence of climate change. The 40 different models per site have already been fit. The scope of SCRS' work with Katie will be displaying and modeling which the direction of change in percent crop cover predicted by each of the 40 models for each site. The question of interest is:
+
+What proportion of uncertainty in predicted change comes from each of the three types of models?
+
+Possible response variables include direction of change, either  a predicted increase of decrease in crop coverage or the magnitude of change. Secondary modeling questions include:
+
+(1) What is the proper way to incorporate interactions between models in to the final model?
+
+(2) What is the proper way to test which variables contribute most to the uncertainty in predicted change?
+
+
+\section{Design and Data}
+714 ``focal sites" were chosen based on the first two components of a PCA that Katie believed to explain around 65\% of the total variation in baseline coverage from a larger randomly chosen sample of sites({\it verify}) . Sites were located in the Western United States, and Arizona sites were removed {\it why?}. Cover/seedling survival was measured as the baseline response, along with other variables. The other variables were used in the 40 preliminary models. It's important to note the purpose of the study is not in predicting the percent coverage. Models have already been fit for that information. The purpose of the study is in evaluating the uncertainty in predictions from different models.
+
+Because the sites are spatially related and because of the low proportion of total variation explained in the ``focal sites", SCRS will recreate the PCA results. Multidimensional scaling (MDS) is the same as PCA, but preserves the distance between sites. Therefore, in addition, SCRS recommends using sites from the MDS results, rather than the PCA. {\it Katie please send information from all sites, not just the 714 chosen from PCA.}
+
+Two emission scenarios (RCPs) were applied to five climate models (GCMs), totaling 10 climate-emission models. Climate data resulting from the 10 climate-emission models were used as explanatory variables in each of 4 different ecological models, with change in percent cover (from the baseline) as the response, leading to 40 different predictions, from 40 different models for each site. {\it Katie, what is the input for the climate-emission models? What exactly is the climate data and is it the only input in the ecological models? Is the uncertainty in the climate data incorporated in to the ecological models?}
+
+Because each ecological model has the same input from each climate-emissions model data, the ecological model is nested ({\it or is there a better way to account for the uncertainty in output from this model as input in th eother?} within climate-emissions model pairwise combinations. Sites are then spatially correlated and nested within the ecological and climate-emissions models. A suggested hierarchal model for l $\in$ 1:714 sites, k $\in$ 1:4 ecological models, j $\in$ 1:5 climates, and for i $\in$ 1:2 emission scenarios is:
+
+$y_{ijkl} =  \beta_{i}*emissions_{ind} + \gamma_{j}*climate_{ind} + \beta\gamma_{ij}*emissions_{ind}*climate_{ind} + \phi_{k(ij)}*eco_{ind} + \tau_{l(ijk)}*site_{ind}$
+
+The above model assumes a continuous response and would be reasonable for the magnitude of change. Looking at a binary response of predicted increase or decrease is also possible with a generalized linear mixed model (GLMM). The binary response model would provide information of the probability of a predicted increase in coverage, but won't tell of how much of an increase was predicted. If it is most informative as to whether the prediction is above or below the baseline in comparing models, the binary response model would be most reasonable. 
+
+\section{Discussion}
+
+\begin{itemize}
+\item To reduce the complexity of the model, we discussed using the PCA component in the correlation structure rather than a spatial correlation structure.
+
+\item One of the four ecological models is a random forest model which currently has little variation in predictions. Another of Katie's team members is working on this, and will send updated information when it is available.
+
+\item The baseline coverage cannot go below 6\%.
+
+\item Katie uses Rmarkdown.
+
+\item Katie would like help interpreting sums of squares if that is the type of model used.
+
+\item While models would be interesting, plots may suffice.
+
+\end{itemize}
+
+
+\section{Timeframe}
+{\it I don't have this recorded.}
+
+\section{Next Steps}
+Katie, please clarify the questions in our notes and add any additional information.  Once complete site data is sent, SCRS will work on replicating the PCA and MDS.
+
+SCRS will make preliminary plots to support Katie's plots in her power point parsing out the model predictions.
+
+Katie will keep SCRS posted on the random forest progress. 
+
+After discussing plots and random forest progress, we will discuss the benefits of modeling again.
+
+\decorativeline
+\hrule
+
+\begin{center}
+	   \emph{When you make use of our work for publications or presentations, please be sure to acknowledge the funding we receive from NIGMS using the following: Research reported in this publication was supported by the National Institute of General Medical Sciences of the National Institutes of Health under Award Number P20GM103474. The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health. } 
+    \end{center}%
+%----------------------------------------------------------------------------------------
+
+\end{document}
